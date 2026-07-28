@@ -1,6 +1,6 @@
 
 # Steam Games Market Analysis Dashboard
-# Data Visualization Final Project
+
 
 
 import streamlit as st
@@ -8,9 +8,8 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-# ------------------------------------------------------------
+
 # Page Configuration
-# ------------------------------------------------------------
 
 st.set_page_config(
     page_title="Steam Games Dashboard",
@@ -19,9 +18,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ------------------------------------------------------------
 # Custom CSS
-# ------------------------------------------------------------
 
 st.markdown("""
 <style>
@@ -56,9 +53,7 @@ footer{
 </style>
 """, unsafe_allow_html=True)
 
-# ------------------------------------------------------------
 # Load Dataset
-# ------------------------------------------------------------
 
 import gdown
 import os
@@ -85,9 +80,7 @@ def load_data():
 
 df = load_data()
 
-# ------------------------------------------------------------
 # Data Cleaning
-# ------------------------------------------------------------
 
 # Columns expected to be numeric
 numeric_columns = [
@@ -141,9 +134,7 @@ if "Release date" in df.columns:
     
 
 
-# ------------------------------------------------------------
 # Header
-# ------------------------------------------------------------
 
 st.title("🎮 Steam Games Market Analysis Dashboard")
 
@@ -159,9 +150,7 @@ and player engagement using the Steam Games Dataset.
 
 st.divider()
 
-# ------------------------------------------------------------
 # Sidebar
-# ------------------------------------------------------------
 
 st.sidebar.header("🎛️ Dashboard Controls")
 
@@ -174,9 +163,7 @@ segments of the Steam Games dataset.
 
 st.sidebar.divider()
 
-# ------------------------------------------------------------
 # Genre Filter
-# ------------------------------------------------------------
 
 genres = sorted(df["Genres"].dropna().unique())
 
@@ -185,9 +172,7 @@ selected_genre = st.sidebar.selectbox(
     ["All"] + list(genres)
 )
 
-# ------------------------------------------------------------
 # Publisher Filter
-# ------------------------------------------------------------
 
 publishers = sorted(df["Publishers"].dropna().unique())
 
@@ -196,9 +181,7 @@ selected_publisher = st.sidebar.selectbox(
     ["All"] + list(publishers)
 )
 
-# ------------------------------------------------------------
 # Required Age Filter
-# ------------------------------------------------------------
 
 ages = sorted(df["Required age"].dropna().astype(int).unique())
 
@@ -207,9 +190,7 @@ selected_age = st.sidebar.selectbox(
     ["All"] + list(ages)
 )
 
-# ------------------------------------------------------------
 # Price Range
-# ------------------------------------------------------------
 
 price_range = st.sidebar.slider(
     "💲 Price Range ($)",
@@ -225,9 +206,7 @@ st.sidebar.divider()
 
 
 
-# ------------------------------------------------------------
 # Apply Filters
-# ------------------------------------------------------------
 
 filtered_df = df.copy(deep=True)
 
@@ -326,15 +305,11 @@ with overview_tab:
         "This section provides an overview of the Steam Games dataset, highlighting the most popular games, genre distribution, and pricing trends."
     )
 
-    # --------------------------------------------------------
     # Row 1
-    # --------------------------------------------------------
 
     col1, col2 = st.columns(2)
 
-    # ==========================
     # Top 10 Games
-    # ==========================
 
     with col1:
 
@@ -366,9 +341,7 @@ with overview_tab:
 
         st.plotly_chart(fig, use_container_width=True)
 
-    # ==========================
     # Genre Distribution
-    # ==========================
 
     with col2:
 
@@ -398,15 +371,11 @@ with overview_tab:
 
         st.plotly_chart(fig, use_container_width=True)
 
-    # --------------------------------------------------------
     # Row 2
-    # --------------------------------------------------------
 
     col3, col4 = st.columns(2)
 
-    # ==========================
     # Price Distribution
-    # ==========================
 
     with col3:
 
@@ -438,9 +407,7 @@ with overview_tab:
 
         st.plotly_chart(fig, use_container_width=True)
 
-    # ==========================
     # User Score Distribution
-    # ==========================
 
     with col4:
 
@@ -462,9 +429,7 @@ with overview_tab:
 
         st.plotly_chart(fig, use_container_width=True)
 
-    # --------------------------------------------------------
     # Dataset Summary
-    # --------------------------------------------------------
 
     st.subheader("📋 Overview Statistics")
 
@@ -496,9 +461,7 @@ with market_tab:
 
     col1, col2 = st.columns(2)
 
-    # ==========================================
     # Correlation Heatmap
-    # ==========================================
 
     with col1:
 
@@ -527,9 +490,7 @@ with market_tab:
 
         st.plotly_chart(fig, use_container_width=True)
 
-    # ==========================================
     # Top Publishers
-    # ==========================================
 
     with col2:
 
@@ -573,15 +534,11 @@ with performance_tab:
     ratings, recommendations, popularity, and pricing.
     """)
 
-    # -------------------------------------------------------
     # Row 1
-    # -------------------------------------------------------
 
     col1, col2 = st.columns(2)
 
-    # ==========================================
     # Top Rated Games
-    # ==========================================
 
     with col1:
 
@@ -610,9 +567,7 @@ with performance_tab:
 
         st.plotly_chart(fig, use_container_width=True)
 
-    # ==========================================
     # Most Recommended Games
-    # ==========================================
 
     with col2:
 
@@ -641,15 +596,11 @@ with performance_tab:
 
         st.plotly_chart(fig, use_container_width=True)
 
-    # -------------------------------------------------------
     # Row 2
-    # -------------------------------------------------------
 
     col3, col4 = st.columns(2)
 
-    # ==========================================
     # Peak Concurrent Users
-    # ==========================================
 
     with col3:
 
@@ -678,9 +629,7 @@ with performance_tab:
 
         st.plotly_chart(fig, use_container_width=True)
 
-    # ==========================================
     # Price vs User Score
-    # ==========================================
 
     with col4:
 
@@ -706,9 +655,7 @@ with performance_tab:
 
         st.plotly_chart(fig, use_container_width=True)
 
-    # -------------------------------------------------------
     # Full Width Chart
-    # -------------------------------------------------------
 
     st.subheader("🏅 Top Games by Metacritic Score")
 
@@ -744,9 +691,7 @@ with insight_tab:
     This section summarizes the most important findings from the Steam Games dataset.
     """)
 
-    # ==========================================================
     # KPI Metrics
-    # ==========================================================
 
     total_games = len(filtered_df)
 
@@ -776,9 +721,7 @@ with insight_tab:
 
     st.divider()
 
-    # ==========================================================
     # Most Common Genre
-    # ==========================================================
 
     st.subheader("🎮 Most Popular Genres")
 
@@ -815,9 +758,7 @@ with insight_tab:
 
     st.divider()
 
-    # ==========================================================
     # Key Insights
-    # ==========================================================
 
     st.subheader("📌 Key Insights")
 
