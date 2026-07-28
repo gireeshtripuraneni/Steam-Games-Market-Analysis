@@ -20,6 +20,9 @@ https://steam-games-market-analysis-3gpotck5qp9gsnxpxexdyq.streamlit.app
 🔗 **GitHub Repository:**  
 https://github.com/gireeshtripuraneni/Steam-Games-Market-Analysis
 
+🔗 **dataset:** 
+https://www.kaggle.com/datasets/fronkongames/steam-games-dataset/data
+
 ---
 
 ## 📊 Features
