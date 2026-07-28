@@ -1,7 +1,7 @@
-# ============================================================
+
 # Steam Games Market Analysis Dashboard
 # Data Visualization Final Project
-# ============================================================
+
 
 import streamlit as st
 import pandas as pd
@@ -60,17 +60,28 @@ footer{
 # Load Dataset
 # ------------------------------------------------------------
 
+import gdown
+import os
+import pandas as pd
+import streamlit as st
+
 @st.cache_data
 def load_data():
+    file_id = "17X7MhTvbqW3N6YeuATl0TOKxEYyOqwUm"
+    output = "games.csv"
 
-    df = pd.read_csv(
-    "games.csv",
-    quotechar='"',
-    engine="python"
-)
+    if not os.path.exists(output):
+        gdown.download(
+            f"https://drive.google.com/uc?id={file_id}",
+            output,
+            quiet=False
+        )
 
-    return df
-
+    return pd.read_csv(
+        output,
+        quotechar='"',
+        engine="python"
+    )
 
 df = load_data()
 
